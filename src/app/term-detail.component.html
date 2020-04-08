@@ -1,0 +1,64 @@
+<div class="row" *ngIf="term">  
+  <div class="col-md-6 col-sm-6">
+    <dl class="dl-horizontal">
+    <h3>English term detail - {{ term.wordEnglish }}</h3>
+      <dt>Definitions ({{term.definitions.length }})</dt>
+      <dt><br><a routerLink="../../add-definition/{{ term._id }}" class="btn btn-default">Add another</a></dt>
+        <dd *ngFor = "let d of term.definitions" >
+            <blockquote class="blockquote"> 
+                <p style="font-size: 12px" class="mb-0"> {{ d.definition }}  </p>
+                <footer class="blockquote-footer">by <cite> {{ d.authorName }}</cite></footer>
+                <Button style="color:darkblue;font-size: 12px;" (click)="like(d._id)">Like {{ d.likes }}</Button>
+            </blockquote> 
+        </dd>
+      <br>
+      <dt>Field of Study</dt>
+      <dd>{{ term.fieldOfStudy }}</dd>
+      <br>
+      <dt>Author name</dt>
+      <dd>{{ term.authorName }}</dd>
+      <br>
+      <dt>Dates</dt>
+      <dd>{{ term.dateCreated }}</dd>
+      <dd>{{ term.dateRevised }}</dd>
+      <br>
+      <dt>Translations</dt>
+        <dd>
+            <Button style="color:darkblue" routerLink="../../../other/create/{{ term._id }}" routerLinkActive="active">Add translation</Button>
+            <span *ngFor="let t of termsNonEnglish">
+                <Button *ngIf="t.termEnglishId == term._id" routerLink="../../../other/detail/{{ t._id }}" routerLinkActive="active">{{ t.languageCode }}</Button>
+            </span>
+        </dd>
+            
+        <br>
+       <dt *ngIf="term.linkAuthoritative.length > 0 || term.linkWikipedia.length > 0 || term.linkYouTube.length > 0"> Links</dt> 
+        <dd>
+            <a *ngIf="term.linkAuthoritative" style="color: darkblue;" class="btn btn-default" href="{{term.linkAuthoritative }}">Authoritative</a>
+            <a *ngIf="term.linkWikipedia" style="color: darkblue;" class="btn btn-default" href="{{ term.linkWikipedia }}">Wikipedia</a>
+            <a *ngIf="term.linkYouTube" style="color: darkblue;" class="btn btn-default" href="{{ term.linkYouTube }}">Youtube </a>
+        </dd>
+      <br>
+        
+      <dt>Was this helpful?</dt>
+        <dd>
+          <Button style="color:darkblue" ([ngModel])="helpyes"  (click)="yes()">Yes {{ term.helpYes }}</Button>
+          &nbsp;
+          <Button style="color:darkblue"  ([ngModel])="helpno"  (click)="no()">No {{ term.helpNo }}</Button>
+        </dd>
+    
+         
+    </dl>
+  </div>
+  <div class="col-md-2 col-sm-4">
+    <img [src]="term.image" alt="" class="img-rounded img-responsive">
+  </div>
+</div>
+<div *ngIf="term">
+  <hr>
+  <a routerLink="/terms" class="btn btn-default">Back to list</a>
+</div>
+
+<div *ngIf="!term">
+  <p>Requested term was not found</p>
+  <p><a routerLink="/terms" class="btn btn-default">Back to list</a></p>
+</div>

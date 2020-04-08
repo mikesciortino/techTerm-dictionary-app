@@ -1,0 +1,47 @@
+<div class="row" *ngIf="term">  
+    <div class="col-md-6 col-sm-6">
+      <dl class="dl-horizontal">
+      <h3>Add another definition to - {{ term.wordNonEnglish }}</h3>
+        <dt>New definition</dt>
+        <dd>Enter data, and click the save button</dd>
+        <dd>
+            <form (ngSubmit)="onSubmit()" #f='ngForm'>
+                <div class="form-group">
+                <label for="authorName">Author name:</label><br>
+                <input id="authorName" class="form-control" name="authorName" type="text" [(ngModel)]="newDefinition.authorName" required>
+                </div>
+          
+                <div class="form-group">
+                <label for="wordEnglish">Definition:</label><br>
+                <textarea id="wordEnglish" class="form-control" name="wordEnglish" type="text" [(ngModel)]="newDefinition.definition" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+                <button><a routerLink="../../detail/{{ term._id }}" routerLinkActive="active">Back to term</a></button>
+            </form>
+        </dd>
+        <br>
+
+        <dt>Existing definitions ({{term.definitions.length }})</dt>
+          <dd *ngFor = "let d of term.definitions" >
+              <blockquote class="blockquote"> 
+                  <p style="font-size: 12px" class="mb-0"> {{ d.definition }}  </p>
+                  <footer class="blockquote-footer">by <cite> {{ d.authorName }}</cite></footer>
+                  <Button style="color:darkblue;font-size: 12px;">Like {{ d.likes }}</Button>
+              </blockquote> 
+          </dd>
+        <br>
+        <dt>Field of Study</dt>
+        <dd>{{ term.fieldOfStudy }}</dd>
+        
+      </dl>
+    </div>
+  </div>
+  <div *ngIf="term">
+    <hr>
+    <a routerLink="/terms" class="btn btn-default">Back to list</a>
+  </div>
+  
+  <div *ngIf="!term">
+    <p>Requested term was not found</p>
+    <p><a routerLink=".." class="btn btn-default">Back to list</a></p>
+  </div>

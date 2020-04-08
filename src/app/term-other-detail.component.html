@@ -1,0 +1,55 @@
+<div class="row" *ngIf="otherTerm">  
+    <div class="col-md-6 col-sm-6">
+      <dl class="dl-horizontal">
+      <h3>Non-English term detail - {{ otherTerm.wordNonEnglish }}</h3>
+      <h3>{{ otherTerm.languageCode }} for {{ otherTerm.wordEnglish }}</h3>
+        <dt>Definitions ({{otherTerm.definitions.length }})</dt>
+        <dt><br><a routerLink="../../add-definition/{{ otherTerm._id }}" class="btn btn-default">Add another</a></dt>
+          <dd *ngFor = "let d of otherTerm.definitions" >
+              <blockquote class="blockquote"> 
+                  <p style="font-size: 12px" class="mb-0"> {{ d.definition }}  </p>
+                  <footer class="blockquote-footer">by <cite> {{ d.authorName }}</cite></footer>
+                  <Button style="color:darkblue;font-size: 12px;" (click)="like(d._id)">Like {{ d.likes }}</Button>
+              </blockquote> 
+          </dd>
+        <br>
+        <dt>Field of Study</dt>
+        <dd>{{ otherTerm.fieldOfStudy }}</dd>
+        <br>
+        <dt>Author name</dt>
+        <dd>{{ otherTerm.authorName }}</dd>
+        <br>
+        <dt>Dates</dt>
+        <dd>{{ otherTerm.dateCreated }}</dd>
+        <dd>{{ otherTerm.dateRevised }}</dd>
+              
+        <br> 
+         <dt *ngIf="otherTerm.linkAuthoritative.length > 0 || otherTerm.linkWikipedia.length > 0 || otherTerm.linkYouTube.length > 0"> Links</dt> 
+            <dd>
+              <a *ngIf="otherTerm.linkAuthoritative" style="color: darkblue;" class="btn btn-default" href="{{  otherTerm.linkAuthoritative }}">Authoritative</a>
+              <a *ngIf="otherTerm.linkWikipedia" style="color: darkblue;" class="btn btn-default" href="{{ otherTerm.linkWikipedia }}">Wikipedia</a>
+              <a *ngIf="otherTerm.linkYouTube" style="color: darkblue;" class="btn btn-default" href="{{ otherTerm.linkYouTube }}">Youtube </a>
+            </dd>
+        <br>
+          
+        <dt>Was this helpful?</dt>
+          <dd>
+            <Button style="color:darkblue" (click)="yes()">Yes {{ otherTerm.helpYes }}</Button>
+            &nbsp;
+            <Button style="color:darkblue" (click)="no()">No {{ otherTerm.helpNo }}</Button>
+          </dd>        
+      </dl>
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <img [src]="otherTerm.image" alt="" class="img-rounded img-responsive">
+    </div>
+  </div>
+  <div *ngIf="otherTerm">
+    <hr>
+    <a routerLink="/terms" class="btn btn-default">Back to List</a>
+  </div>
+  
+  <div *ngIf="!otherTerm">
+    <p>Requested term was not found</p>
+    <p><a routerLink=".." class="btn btn-default">Back to list</a></p>
+  </div>

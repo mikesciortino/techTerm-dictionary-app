@@ -1,0 +1,46 @@
+<h3>Create a new English Term</h3>
+
+<form (ngSubmit)="onSubmit()" #f='ngForm'>
+      <div class="form-group">
+        <label for="authorName">Author name:</label><br>
+        <input id="authorName" class="form-control" name="authorName" type="text" [(ngModel)]="newTerm.authorName" required>
+      </div>
+    
+      <div class="form-group">
+        <label for="wordEnglish">Term or word in English:</label><br>
+        <input id="wordEnglish" class="form-control" name="wordEnglish" type="text" [(ngModel)]="newTerm.wordEnglish" required>
+      </div>
+
+      <div class="form-group">
+        <label for="wordExpanded">Expansion, if term or word (above) is an acronym or initialism</label><br>
+        <input id="wordExpanded" class="form-control" name="wordExpanded" type="text" [(ngModel)]="newTerm.wordExpanded">
+      </div>
+
+      <div class="form-group">
+        <label for="fieldOfStudy">Field of study: </label><br>
+        <input id="fieldOfStudy" placeholder="e.g Computer Programming"class="form-control" name="fieldOfStudy" type="text" [(ngModel)]="newTerm.fieldOfStudy" required>
+      </div>
+
+      <div class="form-group">
+        <label for="definition">Definition: </label><br>
+        <textarea id="definition" class="form-control" name="definition" type="text" [(ngModel)]="newTerm.definition" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="linkAuthoritative">Link (URL), authoritative:</label><br>
+        <input id="linkAuthoritative" class="form-control" name="linkAuthoritative" type="text" [(ngModel)]="newTerm.linkAuthoritative">
+      </div>
+
+      <div class="form-group">
+        <label for="linkWikipedia">Link (URL) on Wikipedia:</label><br>
+        <input id="linkWikipedia" class="form-control" name="linkWiki" type="text" [(ngModel)]="newTerm.linkWikipedia">
+      </div>
+
+      <div class="form-group">
+        <label for="linkYoutube">Link (URL) on Youtube:</label><br>
+        <input id="linkYoutube" class="form-control" name="linkYoutube" type="text" [(ngModel)]="newTerm.linkYoutube">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button> &nbsp;
+      <button><a routerLink="../../terms" routerLinkActive="active">Back to list</a></button>
+</form>

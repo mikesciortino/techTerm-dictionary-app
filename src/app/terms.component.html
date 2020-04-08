@@ -1,0 +1,31 @@
+<hr>
+
+<h3>List of English Terms -  Search: 
+  <input style="font-size: 18px;" placeholder="3 or more characters" type="search" [(ngModel)]="search" (ngModelChange)="doSearch()">
+  &nbsp;
+  <Button style="font-size: 18px;"><a routerLink="../terms/create" routerLinkActive="active">Add new</a></Button>
+</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Word</th>
+      <th>Author</th>
+      <th>Definition</th>
+      <th>Field of Study</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of terms">
+      <td>{{ t.wordEnglish }}</td>
+      <td>{{ t.authorName }}</td>
+      <td>{{ t.definitions[0].definition }}
+      <li>{{t.definitions.length-1}} more definitions</li>      
+      </td>
+      <td>{{ t.fieldOfStudy }}</td>
+      <td><Button><a routerLink="detail/{{ t._id }}" routerLinkActive="active">Detail</a></Button></td>
+    </tr>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+<hr>
